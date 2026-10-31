@@ -15,11 +15,12 @@
             </intent-filter>
         </activity>
         
-        <!-- YENİ: Hayalet Ekran (Saydam, Son uygulamalarda gizli kalır) -->
+        <!-- YENİ: Ekransız, Animasyonsuz ve Geçmişte iz bırakmayan hayalet ekran -->
         <activity
             android:name=".TriggerActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:theme="@android:style/Theme.NoDisplay"
             android:excludeFromRecents="true"
+            android:noHistory="true"
             android:exported="false" />
 
         <service
