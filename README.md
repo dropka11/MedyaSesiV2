@@ -1,1 +1,2 @@
 # MedyaSesi
+# with ghost screen
