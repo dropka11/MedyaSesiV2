@@ -17,28 +17,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val textView = TextView(this)
-        textView.text = "V3 Güncellemesi tamamlandı!\n\nZamanlamalar düzeltildi ve arka plan uygulamalarının kesilmesi engellendi."
+        textView.text = "Zamanlama güncellendi!"
         textView.textSize = 18f
         textView.setPadding(50, 50, 50, 50)
         setContentView(textView)
     }
 }
 
-// Sadece paneli kapatmak için var olan tamamen EKRANSIZ (NoDisplay) Dummy Activity
 class TriggerActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         @Suppress("DEPRECATION")
-        overridePendingTransition(0, 0) // Sistemin açılış animasyonunu iptal et
-        finish() // Hiçbir şey yapmadan anında kapanır
+        overridePendingTransition(0, 0) 
+        finish() 
     }
 }
 
 class VolumeTileService : TileService() {
     override fun onClick() {
         super.onClick()
-        
-        // 1. Adım: Paneli kapatma emri (Hayalet ekran üzerinden)
         val intent = Intent(this, TriggerActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
         
@@ -50,10 +47,10 @@ class VolumeTileService : TileService() {
             startActivityAndCollapse(intent)
         }
 
-        // 2. Adım: Panel kapanırken çarpışma olmaması için 300 ms bekle, sonra sesi göster
+        // SÜRE UZATILDI: Panel kapandıktan sonra 600 milisaniye (0.6 saniye) bekleyip barı açar.
         Handler(Looper.getMainLooper()).postDelayed({
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI)
-        }, 300)
+        }, 600)
     }
 }
