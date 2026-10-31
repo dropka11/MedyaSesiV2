@@ -5,6 +5,7 @@
         android:label="Medya Sesi"
         android:icon="@drawable/ic_music_note"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -13,6 +14,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <!-- YENİ: Hayalet Ekran (Saydam, Son uygulamalarda gizli kalır) -->
+        <activity
+            android:name=".TriggerActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:exported="false" />
+
         <service
             android:name=".VolumeTileService"
             android:icon="@drawable/ic_music_note"
