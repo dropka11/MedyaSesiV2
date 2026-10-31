@@ -1,0 +1,27 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Depoyu Klonla
+      uses: actions/checkout@v4
+    - name: Java 17 Kurulumu
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+    - name: Gradle Kurulumu
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.2'
+    - name: APK'yi Derle
+      run: gradle assembleDebug
+    - name: APK'yi Kaydet
+      uses: actions/upload-artifact@v4
+      with:
+        name: MedyaSesi-APK
+        path: app/build/outputs/apk/debug/app-debug.apk
